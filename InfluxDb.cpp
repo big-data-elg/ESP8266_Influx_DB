@@ -96,10 +96,12 @@ void Influxdb::begin() {
   // TODO: recreate HttpClient on db change?
   if(_db_v == 2){
 #if defined(ESP8266)
-    if (_port == 443) {
+    if (_host.startsWith("https")) {
         if (_fingerPrint)
           client.setFingerprint(_fingerPrint);
-        http.begin(client, _host, _port, "/api/v2/write?org=" + _org + "&bucket=" + _bucket, true);
+        else
+          client.setInsecure();
+        http.begin(client, _host+ "/api/v2/write?org=" + _org + "&bucket=" + _bucket);
     }
     else
 #endif

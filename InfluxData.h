@@ -1,3 +1,8 @@
+#pragma once
+#ifdef ESP8266
+#include "Arduino.h"
+#endif
+
 /**
     ESP8266 InfluxDb: InfluxData
 
@@ -25,6 +30,11 @@ class InfluxData {
   void setTimestamp(long int seconds)
   {
     _timestamp = " " + String(seconds) + "000000000";
+  }
+
+  void reset()
+  {
+    _values = "";
   }
 
   String toString() const { return _measurement + _tags + _values + _timestamp; }

@@ -1,4 +1,4 @@
-
+#pragma once
 /**
     ESP8266 InfluxDb: Influxdb.h
 
